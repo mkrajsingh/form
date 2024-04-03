@@ -1,75 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Full Name Display</title>
-<style>
-    form {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Name Display</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      form {
         width: 300px;
         margin: 50px auto;
-    }
-    input[type="text"] {
-        width: 100%;
-        padding: 10px;
+      }
+      .input-container {
+        display: flex;
+        align-items: center;
         margin-bottom: 20px;
+      }
+      .input-container label {
+        flex: 1;
+        margin-right: 10px;
+      }
+      input[type="text"] {
+        flex: 2;
+        padding: 10px;
         border: 1px solid #ccc;
-    }
-    button {
+      }
+      button {
+        display: block;
+        width: 100%;
         padding: 10px 20px;
         background-color: #007bff;
         color: #fff;
         border: none;
         cursor: pointer;
-    }
-    .error-message {
+      }
+      .error-message {
         color: red;
         font-size: 14px;
         margin-top: 5px;
         display: none;
-    }
-    .full-name {
+      }
+      .full-name {
         margin-top: 20px;
-    }
-</style>
-</head>
-<body>
+        font-size: 18px;
+        text-align: center;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Full Name Display</h1>
 
-<h1>Full Name Display</h1>
+    <form id="nameForm">
+      <div class="input-container">
+        <label for="firstName">First Name:</label>
+        <input
+          type="text"
+          id="firstName"
+          placeholder="Enter First Name"
+          required
+        />
+      </div>
+      <div class="input-container">
+        <label for="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="lastName"
+          placeholder="Enter Last Name"
+          required
+        />
+      </div>
+      <div class="error-message" id="errorMessage">
+        Please fill in both fields.
+      </div>
+      <button type="submit" id="submitButton">Submit</button>
+      <div class="full-name" id="fullName"></div>
+    </form>
 
-<form id="nameForm">
-    <input type="text" id="firstName" placeholder="First Name" required>
-    <input type="text" id="lastName" placeholder="Last Name" required>
-    <div class="error-message" id="errorMessage">Please fill in both fields.</div>
-    <button type="submit" id="submitButton">Submit</button>
-    <div class="full-name" id="fullName"></div>
-</form>
+    <script>
+      document
+        .getElementById("nameForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent form submission
 
-<script>
-    document.getElementById('nameForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
+          // Get values from input fields
+          var firstName = document.getElementById("firstName").value.trim();
+          var lastName = document.getElementById("lastName").value.trim();
+          var fullNameDiv = document.getElementById("fullName");
+          var errorMessage = document.getElementById("errorMessage");
 
-        // Get values from input fields
-        var firstName = document.getElementById('firstName').value.trim();
-        var lastName = document.getElementById('lastName').value.trim();
-        var fullNameDiv = document.getElementById('fullName');
-        var errorMessage = document.getElementById('errorMessage');
-
-        // Check if both fields are filled
-        if (firstName !== '' && lastName !== '') {
+          // Check if both fields are filled
+          if (firstName !== "" && lastName !== "") {
             // Concatenate first and last name
-            var fullName = firstName + ' ' + lastName;
-            fullNameDiv.textContent = 'Full Name: ' + fullName;
-            fullNameDiv.style.display = 'block'; // Display full name
-            errorMessage.style.display = 'none'; // Hide error message
-            document.getElementById('firstName').classList.remove('highlight');
-        } else {
-            errorMessage.style.display = 'block'; // Show error message
-            document.getElementById('firstName').classList.add('highlight');
-            fullNameDiv.style.display = 'none'; // Hide full name if fields are empty
-        }
-    });
-</script>
-
-</body>
+            var fullName = firstName + " " + lastName;
+            fullNameDiv.textContent = "Full Name: " + fullName;
+            fullNameDiv.style.display = "block"; // Display full name
+            errorMessage.style.display = "none"; // Hide error message
+            document.getElementById("firstName").classList.remove("highlight");
+          } else {
+            errorMessage.style.display = "block"; // Show error message
+            fullNameDiv.style.display = "none"; // Hide full name if fields are empty
+          }
+        });
+    </script>
+  </body>
 </html>
